@@ -14,6 +14,13 @@ export async function getCompletion(options: ChatRequestOptions) {
 
   // TODO: complete call to Chat API here
   // const response =
+  const response = await fetch(`${apiUrl}/chat`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      messages: options.messages,
+    }),
+  });
 
   if (options.stream) {
     return getChunksFromResponse<AIChatCompletionDelta>(response as Response, options.chunkIntervalMs);
